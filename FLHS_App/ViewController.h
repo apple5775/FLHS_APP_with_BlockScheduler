@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIWebViewDelegate> {
+    IBOutlet UIWebView *schedWeb;
+    IBOutlet UITextView *schedText;
+    IBOutlet UIBarButtonItem *refreshButton;
+    
+    IBOutlet UIWebView *sportWeb;
+    IBOutlet UITextView *sportText;
+}
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+
+-(IBAction)refresh:(id)sender;
+
 
 @end
