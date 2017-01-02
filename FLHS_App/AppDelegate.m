@@ -27,8 +27,13 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"Helvetica-Light" size:21.0], NSFontAttributeName, nil]];
     
-    [Parse setApplicationId:@"rxnQYcc4cGE16XzZEzkjLbobtqscs8xt7bqxj40g"
-                  clientKey:@"83Gx5MS2NkfDeagqKsj0f6hTdVt1yzftQkIJyROF"];
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"rxnQYcc4cGE16XzZEzkjLbobtqscs8xt7bqxj40g";
+        configuration.clientKey = @"83Gx5MS2NkfDeagqKsj0f6hTdVt1yzftQkIJyROF";
+        configuration.server = @"https://flhsappmigration.herokuapp.com/parse";
+    }]];
+
+    
     
     // Register for Push Notitications, if running iOS 8
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
