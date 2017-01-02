@@ -79,7 +79,7 @@ typedef enum
     CGFloat moveX = nowPoint.x - _init.x;
     CGFloat moveY = nowPoint.y - _init.y;
     
-    if (abs(moveX) > kDirectionPanThreshold)
+    if (fabs(moveX) > kDirectionPanThreshold)
     {
         if (_direction == SWDirectionPanGestureRecognizerHorizontal)
             _dragging = YES;
