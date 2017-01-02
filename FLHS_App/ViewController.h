@@ -13,8 +13,7 @@
     IBOutlet UITextView *schedText;
     IBOutlet UIBarButtonItem *refreshButton;
     
-    IBOutlet UIWebView *sportWeb;
-    IBOutlet UITextView *sportText;
+
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;

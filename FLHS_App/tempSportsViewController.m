@@ -32,7 +32,7 @@
     self.navigationItem.leftBarButtonItem = _sidebarButton;
     self.navigationItem.rightBarButtonItem = nil;
     
-    NSURL *url = [NSURL URLWithString:@"http://sportspak.swboces.org/sportspak/oecgi3.exe/O4W_GAMES_SCHEDS"];
+    NSURL *url = [NSURL URLWithString:@"http://www.foxlaneathletics.org/calendar"];
     [webScreen loadRequest:[NSURLRequest requestWithURL:url]];
 }
 

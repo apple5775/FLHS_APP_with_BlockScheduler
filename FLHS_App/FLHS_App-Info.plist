@@ -42,6 +42,8 @@
 		<dict>
 			<key>www.bcsdny.org</key>
 			<string></string>
+			<key>www.foxlaneathletics.org</key>
+			<string></string>
 		</dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>

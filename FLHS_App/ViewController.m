@@ -34,16 +34,11 @@
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     schedText.text = @"Loading...";
-    sportText.text = @"Loading...";
     [schedWeb setDelegate:self];
-    [sportWeb setDelegate:self];
-    
+
     NSURL *schedURL = [NSURL URLWithString:@"http://www.bcsdny.org/flhs.cfm?subpage=12"];
     [schedWeb loadRequest:[NSURLRequest requestWithURL:schedURL]];
     
-    NSURL *sportURL = [NSURL URLWithString:@"http://sportspak.swboces.org/sportspak/oecgi3.exe/O4W_SPAKONLINE_HOME"];
-    [sportWeb loadRequest:[NSURLRequest requestWithURL:sportURL]];
-
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -75,24 +70,6 @@
         schedText.text = [schedTextStr stringByTrimmingCharactersInSet:
                                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 
-    } else if (webView == sportWeb) {
-        NSString *sportHTML = [sportWeb stringByEvaluatingJavaScriptFromString:@"document.getElementById('DAILY_EVENTS').innerText"];
-        
-        NSArray *split = [sportHTML  componentsSeparatedByCharactersInSet: [NSCharacterSet newlineCharacterSet]];
-        NSString *sportTextStr = @"";
-        
-        for (int i = 0; i < split.count; i++) {
-            if ([split[i] containsString:@"FOX"]) {
-                NSString *temp = [split[i] stringByAppendingString:@"\n\n"];
-                sportTextStr = [sportTextStr stringByAppendingString:temp];
-            }
-        }
-        
-         sportText.text = sportTextStr;
-        if ([sportTextStr isEqualToString:@""]) {
-            sportText.text = @"None";
-        }
-        
     }
 }
 
@@ -102,9 +79,6 @@
     NSURL *schedURL = [NSURL URLWithString:@"http://www.bcsdny.org/flhs.cfm?subpage=12"];
     [schedWeb loadRequest:[NSURLRequest requestWithURL:schedURL]];
     
-    sportText.text = @"Refreshing...";
-    NSURL *sportURL = [NSURL URLWithString:@"http://sportspak.swboces.org/sportspak/oecgi3.exe/O4W_SPAKONLINE_HOME"];
-    [sportWeb loadRequest:[NSURLRequest requestWithURL:sportURL]];
 }
 
 - (void)didReceiveMemoryWarning
