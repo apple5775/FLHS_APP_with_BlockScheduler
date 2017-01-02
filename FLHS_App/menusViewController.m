@@ -38,7 +38,7 @@
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     //self.navigationItem.leftBarButtonItem = _sidebarButton;
     
-    [webScreen loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.bcsdny.org/files/filesystem/flmsflhslunchmenu1.pdf"]]];
+    [webScreen loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://drive.google.com/viewerng/viewer?url=http://www.bcsdny.org/files/filesystem/flhslunchmenu1.pdf"]]];
     
     [super viewDidLoad];
 }

@@ -161,11 +161,29 @@
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"specialB"]==false) {
+        day = @"none"; //It will be changed if we find a correct day code.
         NSDate *today = [NSDate date];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setDateFormat:@"MM/dd"];
         dateString = [dateFormat stringFromDate:today];
-        dayList = @{@"04/06":@"A",@"04/07":@"B",@"04/08":@"C",@"04/09":@"D",@"04/10":@"E",@"04/11":@"Weekend",@"04/12":@"Weekend",@"04/13":@"1",@"04/14":@"2",@"04/15":@"3",@"04/16":@"special",@"04/17":@"4",@"04/18":@"Weekend",@"04/19":@"Weekend",@"04/20":@"A",@"04/21":@"B",@"04/22":@"C",@"04/23":@"D",@"04/24":@"Col",@"04/25":@"Weekend",@"04/26":@"Weekend",@"04/27":@"1",@"04/28":@"2",@"04/29":@"3",@"04/30":@"4",@"05/01":@"5",@"05/02":@"Weekend",@"05/03":@"Weekend",@"05/04":@"A",@"05/05":@"B",@"05/06":@"C",@"05/07":@"D",@"05/08":@"Adv",@"05/09":@"Weekend",@"05/10":@"Weekend",@"05/11":@"1",@"05/12":@"2",@"05/13":@"3",@"05/14":@"4",@"05/15":@"5",@"05/16":@"Weekend",@"05/17":@"Weekend",@"05/18":@"A",@"05/19":@"B",@"05/20":@"C",@"05/21":@"D",@"05/22":@"Col",@"05/23":@"Weekend",@"05/24":@"Weekend",@"05/25":@"none",@"05/26":@"1",@"05/27":@"2",@"05/28":@"3",@"05/29":@"4",@"05/30":@"Weekend",@"05/31":@"Weekend",@"06/01":@"A",@"06/02":@"B",@"06/03":@"C",@"06/04":@"D",@"06/05":@"Adv",@"06/06":@"Weekend",@"06/07":@"Weekend",@"06/08":@"5",@"06/09":@"E",@"06/10":@"5"};
+        [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+            NSArray *days = config[@"WhatDay"];
+            NSLog(@"Sucessfully accessed Day Codes", "Yay!");
+            NSString *separatingString = @":";
+            for (NSString *dayCode in days) {
+                NSArray *subStrings = [dayCode componentsSeparatedByString:separatingString];
+                NSString *date = subStrings[0];
+                NSLog(date);
+                if ([date isEqualToString: dateString]) {
+                    NSLog(subStrings[1]);
+                    day = subStrings[1];
+                    break;
+                }
+            }
+        }];
+        
+        
+     /*   dayList = @{@"04/06":@"A",@"04/07":@"B",@"04/08":@"C",@"04/09":@"D",@"04/10":@"E",@"04/11":@"Weekend",@"04/12":@"Weekend",@"04/13":@"1",@"04/14":@"2",@"04/15":@"3",@"04/16":@"special",@"04/17":@"4",@"04/18":@"Weekend",@"04/19":@"Weekend",@"04/20":@"A",@"04/21":@"B",@"04/22":@"C",@"04/23":@"D",@"04/24":@"Col",@"04/25":@"Weekend",@"04/26":@"Weekend",@"04/27":@"1",@"04/28":@"2",@"04/29":@"3",@"04/30":@"4",@"05/01":@"5",@"05/02":@"Weekend",@"05/03":@"Weekend",@"05/04":@"A",@"05/05":@"B",@"05/06":@"C",@"05/07":@"D",@"05/08":@"Adv",@"05/09":@"Weekend",@"05/10":@"Weekend",@"05/11":@"1",@"05/12":@"2",@"05/13":@"3",@"05/14":@"4",@"05/15":@"5",@"05/16":@"Weekend",@"05/17":@"Weekend",@"05/18":@"A",@"05/19":@"B",@"05/20":@"C",@"05/21":@"D",@"05/22":@"Col",@"05/23":@"Weekend",@"05/24":@"Weekend",@"05/25":@"none",@"05/26":@"1",@"05/27":@"2",@"05/28":@"3",@"05/29":@"4",@"05/30":@"Weekend",@"05/31":@"Weekend",@"06/01":@"A",@"06/02":@"B",@"06/03":@"C",@"06/04":@"D",@"06/05":@"Adv",@"06/06":@"Weekend",@"06/07":@"Weekend",@"06/08":@"5",@"06/09":@"E",@"06/10":@"5"};
         NSDictionary *advColList = @{@"04/24":@"E",@"05/08":@"E",@"05/22":@"E",@"06/05":@"E"};
         
         if (![day isEqualToString:@"1HD"] && ![day isEqualToString:@"2HD"]) {
@@ -179,7 +197,7 @@
         
         if ([advColList objectForKey:dateString] != NULL) {
             advColString = [advColList objectForKey:dateString];
-        }
+        }*/
     }
     
     lunch = (int)[[NSUserDefaults standardUserDefaults] integerForKey: @"lunchNum"];
