@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Jacob Rauch. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "menusViewController.h"
 #import "SWRevealViewController.h"
 
@@ -38,7 +39,15 @@
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     //self.navigationItem.leftBarButtonItem = _sidebarButton;
     
-    [webScreen loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://drive.google.com/viewerng/viewer?url=http://www.bcsdny.org/files/filesystem/flhslunchmenu1.pdf"]]];
+    //Sets up google viewer URL. Concatenates current lunch menu url from heroku to the google viewerurl string.
+    NSString *googleViewerPrestring = @"https://drive.google.com/viewerng/viewer?url=";
+    
+    [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
+        NSString *currentLunchMenuURL = config[@"LunchMenuURL"];
+        NSString *currentGoogleLunchMenuURL = [NSString stringWithFormat: @"%@%@", googleViewerPrestring, currentLunchMenuURL];
+        [webScreen loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:currentGoogleLunchMenuURL]]];
+        NSLog(currentGoogleLunchMenuURL);
+    }];
     
     [super viewDidLoad];
 }
