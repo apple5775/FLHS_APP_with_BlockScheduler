@@ -85,18 +85,27 @@
     NSLog(@"lunchType %@", self.lunchData[dayValue]);
     if (dayValue != 4 && dayValue != 9){
         if ([self.lunchData[dayValue] isEqualToString: @"Early"]){
+            int prevIndex = [tableData indexOfObject:@"Lunch"];
+            if (prevIndex >=0)
+                [tableData setObject:@"-Please Select Course-" atIndexedSubscript:prevIndex];
             NSArray * eReg = @[@"7:45-8:40", @"8:45-9:40", @"9:45-10:20", @"10:25-11:20", @"11:25-12:20", @"12:25-1:20", @"1:25-2:20"];
             timeData = [[NSMutableArray alloc]init];
             [timeData addObjectsFromArray:eReg];
             NSLog(@"WHY %@",timeData[1]);
             tableData[2] = @"Lunch";
         } else if ([self.lunchData[dayValue] isEqualToString: @"Middle"]){
+            int prevIndex = [tableData indexOfObject:@"Lunch"];
+            if (prevIndex >=0)
+                [tableData setObject:@"-Please Select Course-" atIndexedSubscript:prevIndex];
             NSArray * mReg = @[@"7:45-8:40", @"8:45-9:40", @"9:45-10:40", @"10:45-11:20", @"11:25-12:20", @"12:25-1:20", @"1:25-2:20"];
             timeData = [[NSMutableArray alloc]init];
             [timeData addObjectsFromArray:mReg];
             NSLog(@"%@",timeData[1]);
             tableData[3] = @"Lunch";
         } else if ([self.lunchData[dayValue] isEqualToString: @"Late"]){
+            int prevIndex = [tableData indexOfObject:@"Lunch"];
+            if (prevIndex >=0)
+                [tableData setObject:@"-Please Select Course-" atIndexedSubscript:prevIndex];
             NSArray * lReg = @[@"7:45-8:40", @"8:45-9:40", @"9:45-10:40", @"10:45-11:40", @"11:45-12:20", @"12:25-1:20", @"1:25-2:20"];
             timeData = [[NSMutableArray alloc]init];
             [timeData addObjectsFromArray:lReg];
@@ -251,8 +260,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     NSString *cellString = tableData[indexPath.row];
-    if ([cellString isEqualToString: @"Lunch"])
+    if ([cellString isEqualToString: @"Lunch"]){
          return;
+    }
     
     if([self.courseData count] == 0){
         UIAlertController* courseAlert = [UIAlertController alertControllerWithTitle:@"No Courses Given"

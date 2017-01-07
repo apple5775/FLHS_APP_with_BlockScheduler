@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     tableData = [[NSMutableArray alloc] init];
+    [self parseSetCourse];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +97,22 @@
         mySchedule[@"courseData"] = [tableData componentsJoinedByString:@",::"];
         [mySchedule save];
     }
+}
+
+- (void) parseSetCourse{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    //PFObject *mySchedule = [query getObjectWithId:@"Uw7eSH1Red"];
+    //NSString *courseString = mySchedule[@"courseData"];
+    query = [query whereKeyExists:@"courseData"];
+    NSArray *results = [query findObjects];
+    if ([results count] == 0)
+        return;
+    PFObject *mySchedule = results[0];
+    //
+    NSString *courseString = mySchedule[@"courseData"];
+    NSLog(@"ALL I WANT FOR CHRISDFKDSFLJ %@", courseString);
+    tableData = [[NSMutableArray alloc] init];
+    [tableData addObjectsFromArray:[courseString componentsSeparatedByString:@",::"]];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

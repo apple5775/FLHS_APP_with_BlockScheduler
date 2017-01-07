@@ -29,6 +29,7 @@
         [lunchData addObject:@"Middle"];
         NSLog(@"%@",lunchData[i]);
     }
+    [self parseSetLunch];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +114,23 @@
         mySchedule[@"lunchData"] = [lunchData componentsJoinedByString:@",::"];
         [mySchedule save];
     }
+}
+
+- (void) parseSetLunch{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    //PFObject *mySchedule = [query getObjectWithId:@"B4NArQDLyh"];
+    //NSString *lunchString = mySchedule[@"lunchData"];
+    query = [query whereKeyExists:@"lunchData"];
+    NSArray *results = [query findObjects];
+    
+    if ([results count] == 0)
+        return;
+    
+    PFObject *mySchedule = results[0];
+    NSString *lunchString = mySchedule[@"lunchData"];
+    NSLog(@"ALL I WANT FOR CHRISDFKDSFLJ %@", lunchString);
+    lunchData = [[NSMutableArray alloc] init];
+    [lunchData addObjectsFromArray:[lunchString componentsSeparatedByString:@",::"]];
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
