@@ -8,6 +8,7 @@
 
 #import "InputLunchViewController.h"
 #import "DayViewController.h"
+#import <Parse/Parse.h>
 
 @interface InputLunchViewController (){
     NSArray* tableData;
@@ -90,6 +91,30 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
+
+- (void) pushParse{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    PFQuery *lunchQuery = [query whereKeyExists:@"lunchData"];
+    NSArray *results = [lunchQuery findObjects];
+    if ([results count] == 0){
+        PFObject *mySchedule = [PFObject objectWithClassName:@"ScheduleBrian"];
+        mySchedule[@"lunchData"] = [lunchData componentsJoinedByString:@",::"];
+        [mySchedule saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // The object has been saved.
+                NSLog(@"YAY YAY YAY");
+            } else {
+                // There was a problem, check error.description
+                NSLog(@"NO NO NO");
+            }
+        }];
+    } else{
+        PFObject *mySchedule = results[0];
+        mySchedule[@"lunchData"] = [lunchData componentsJoinedByString:@",::"];
+        [mySchedule save];
+    }
+}
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString: @"lunchDataSegue"]) {
         DayViewController * destinationVC = segue.destinationViewController;
@@ -99,6 +124,7 @@
     }
 }
 - (IBAction)doneButtonClick:(id)sender {
+    [self pushParse];
     [self performSegueWithIdentifier:@"lunchDataSegue" sender:self];
 }
 

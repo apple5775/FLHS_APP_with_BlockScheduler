@@ -15,6 +15,7 @@
     NSMutableArray* tableData;
     int dayValue;
     NSArray *dayArray;
+    NSArray *dayParseKeyArray;
 }
 
 @end
@@ -43,6 +44,7 @@
     
     dayValue = 0;
     dayArray = @[@"Day A",@"Day B",@"Day C",@"Day D",@"Day E",@"Day 1",@"Day 2",@"Day 3",@"Day 4",@"Day 5"];
+    dayParseKeyArray = @[@"DayA",@"DayB",@"DayC",@"DayD",@"DayE",@"Day1",@"Day2",@"Day3",@"Day4",@"Day5"];
     [self refreshViewController];
     // Do any additional setup after loading the view.
     
@@ -52,12 +54,19 @@
 }
 
 -(void) refreshViewController{
-    self.lunchData = connectorClass.lunchArrayBeingPassed;
+    //self.lunchData = connectorClass.lunchArrayBeingPassed;
+    //self.lunchData = [self getLunchData];
     self.courseData = connectorClass.courseArrayBeingPassed;
     
+    NSLog(@"I CRASHED");
+    [self parseSetLunch];
+    [self parseSetCourse];
+    NSLog(@"jk");
+    //[self queryParse];
     //[self retreiveValuesParseAndSetLocalVar];
     
     NSLog(@"CourseDataFirstValue%@", self.courseData[0]);
+
     NSLog(@"LunchData");
     
     tableData = [[NSMutableArray alloc]init];
@@ -69,6 +78,8 @@
     for (int i = 0; i <= tempNumTableData; i++){
         [tableData addObject:@"Set Course and Lunch"];
     }
+    
+    [self parseSetTableData];
     
     NSLog(@"dayValue %ld", (long)dayValue);
     NSLog(@"lunchType %@", self.lunchData[dayValue]);
@@ -115,23 +126,31 @@
         }
     }
     
+    [self pushParse];
     [self.scheduleTableView reloadData];
 }
 
 - (void) pushParse{
-    PFObject *gameScore = [PFObject objectWithClassName:@"ScheduleBrian"];
-    gameScore[@"lunchData"] = [self.lunchData componentsJoinedByString:@",::"];
-    gameScore[@"courseData"] = @"Sean Plott";
-    gameScore[@"scheduleData"] = @"test";
-    [gameScore saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            // The object has been saved.
-            NSLog(@"YAY YAY YAY");
-        } else {
-            // There was a problem, check error.description
-            NSLog(@"NO NO NO");
-        }
-    }];
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    PFQuery *lunchQuery = [query whereKeyExists:dayParseKeyArray[dayValue]];
+    NSArray *results = [lunchQuery findObjects];
+    if ([results count] == 0){
+        PFObject *mySchedule = [PFObject objectWithClassName:@"ScheduleBrian"];
+        mySchedule[dayParseKeyArray[dayValue]] = [tableData componentsJoinedByString:@",::"];
+        [mySchedule saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // The object has been saved.
+                NSLog(@"YAY YAY YAY");
+            } else {
+                // There was a problem, check error.description
+                NSLog(@"NO NO NO");
+            }
+        }];
+    } else{
+        PFObject *mySchedule = results[0];
+        mySchedule[dayParseKeyArray[dayValue]] = [tableData componentsJoinedByString:@",::"];
+        [mySchedule save];
+    }
 }
 - (void) updateParse{
     PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
@@ -146,19 +165,63 @@
     }];
 }
 
-- (void) retreiveValuesParseAndSetLocalVar{
+-(void) queryParse{
     PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
-    // Retrieve the object by id
-    [query getObjectInBackgroundWithId:@"OXEZI1u1wT"
-                                 block:^(PFObject *ScheduleBrian, NSError *error) {
-                                     self.lunchData = nil;
-                                     NSString *temp = ScheduleBrian[@"lunchData"];
-                                     NSArray *tempArray = [temp componentsSeparatedByString:@",::"];
-                                     self.lunchData = [[NSMutableArray alloc]init];
-                                     [self.lunchData addObjectsFromArray:tempArray];
-                                     NSLog(@"lunchDataAfterQuery %@", self.lunchData[0]);
-                                 }];
-         
+    query = [query whereKeyExists:@"lunchData"];
+    NSArray *results = [query findObjects];
+    PFObject *test = results[0];
+    NSLog(@"%@", test[@"lunchData"]);
+    
+}
+
+- (void) parseSetLunch{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    //PFObject *mySchedule = [query getObjectWithId:@"B4NArQDLyh"];
+    //NSString *lunchString = mySchedule[@"lunchData"];
+    query = [query whereKeyExists:@"lunchData"];
+    NSArray *results = [query findObjects];
+    
+    if ([results count] == 0)
+        return;
+    
+    PFObject *mySchedule = results[0];
+    NSString *lunchString = mySchedule[@"lunchData"];
+    NSLog(@"ALL I WANT FOR CHRISDFKDSFLJ %@", lunchString);
+    self.lunchData = [[NSMutableArray alloc] init];
+    [self.lunchData addObjectsFromArray:[lunchString componentsSeparatedByString:@",::"]];
+}
+
+- (void) parseSetCourse{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    //PFObject *mySchedule = [query getObjectWithId:@"Uw7eSH1Red"];
+    //NSString *courseString = mySchedule[@"courseData"];
+    query = [query whereKeyExists:@"courseData"];
+    NSArray *results = [query findObjects];
+    if ([results count] == 0)
+        return;
+    PFObject *mySchedule = results[0];
+    //
+    NSString *courseString = mySchedule[@"courseData"];
+    NSLog(@"ALL I WANT FOR CHRISDFKDSFLJ %@", courseString);
+    self.courseData = [[NSMutableArray alloc] init];
+    [self.courseData addObjectsFromArray:[courseString componentsSeparatedByString:@",::"]];
+}
+
+- (void) parseSetTableData{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    //PFObject *mySchedule = [query getObjectWithId:@"B4NArQDLyh"];
+    //NSString *lunchString = mySchedule[@"lunchData"];
+    query = [query whereKeyExists:dayParseKeyArray[dayValue]];
+    NSArray *results = [query findObjects];
+    
+    if ([results count] == 0)
+        return;
+    
+    PFObject *mySchedule = results[0];
+    NSString *tableDataString = mySchedule[dayParseKeyArray[dayValue]];
+    NSLog(@"ALL I WANT FOR CHRISDFKDSFLJ %@", tableDataString);
+    tableData = [[NSMutableArray alloc] init];
+    [tableData addObjectsFromArray:[tableDataString componentsSeparatedByString:@",::"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -186,6 +249,10 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    NSString *cellString = tableData[indexPath.row];
+    if ([cellString isEqualToString: @"Lunch"])
+         return;
     
     if([self.courseData count] == 0){
         UIAlertController* courseAlert = [UIAlertController alertControllerWithTitle:@"No Courses Given"
@@ -209,10 +276,9 @@
     
         for (int i = 0; i <= [self.courseData count] - 1; i++){
             [choices addObject: [UIAlertAction actionWithTitle:self.courseData[i] style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action) {tableData[indexPath.row] = self.courseData[i];[self.scheduleTableView reloadData];}]];
+                                                   handler:^(UIAlertAction * action) {tableData[indexPath.row] = self.courseData[i];[self.scheduleTableView reloadData];[self pushParse];}]];
             [courseAlert addAction:choices[i]];
         }
-    
         [self presentViewController:courseAlert animated:YES completion:nil];
     }
 

@@ -8,6 +8,7 @@
 
 #import "InputCourseViewController.h"
 #import "DayViewController.h"
+#import <Parse/Parse.h>
 
 @interface InputCourseViewController (){
     NSMutableArray* tableData;
@@ -73,6 +74,30 @@
     [self.courseTextField resignFirstResponder];
 }
 
+- (void) pushParse{
+    PFQuery *query = [PFQuery queryWithClassName:@"ScheduleBrian"];
+    PFQuery *courseQuery = [query whereKeyExists:@"courseData"];
+    NSArray *results = [courseQuery findObjects];
+    if ([results count] == 0){
+        PFObject *mySchedule = [PFObject objectWithClassName:@"ScheduleBrian"];
+        mySchedule[@"courseData"] = [tableData componentsJoinedByString:@",::"];
+        [mySchedule saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                // The object has been saved.
+                NSLog(@"YAY YAY YAY");
+            } else {
+                // There was a problem, check error.description
+                NSLog(@"NO NO NO");
+            }
+        }];
+    } else{
+
+        PFObject *mySchedule = results[0];
+        mySchedule[@"courseData"] = [tableData componentsJoinedByString:@",::"];
+        [mySchedule save];
+    }
+}
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString: @"courseDataSegue"]) {
         DayViewController * destinationVC = segue.destinationViewController;
@@ -81,7 +106,9 @@
         destinationVC.connectorClass = connectorClass;
     }
 }
+
 - (IBAction)doneButtonClick:(id)sender {
+    [self pushParse];
     [self performSegueWithIdentifier:@"courseDataSegue" sender:self];
 }
 
