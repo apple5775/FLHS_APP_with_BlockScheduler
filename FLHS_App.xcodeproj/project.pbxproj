@@ -47,7 +47,6 @@
 		7675E4A818F47CDF00390B24 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7675E4A718F47CDF00390B24 /* QuartzCore.framework */; };
 		7675E4AA18F47CE500390B24 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7675E4A918F47CE500390B24 /* Security.framework */; };
 		7675E4AE18F47CF500390B24 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7675E4AD18F47CF500390B24 /* SystemConfiguration.framework */; };
-		767DB832199C177300837BEC /* SchedInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767DB831199C177300837BEC /* SchedInfoViewController.m */; };
 		7681FB241A9A42EC00FA2A66 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 769B868D1A660F6A00360DC0 /* NotificationCenter.framework */; };
 		7681FB2A1A9A42EC00FA2A66 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7681FB291A9A42EC00FA2A66 /* TodayViewController.m */; };
 		7681FB2C1A9A42EC00FA2A66 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7681FB2B1A9A42EC00FA2A66 /* MainInterface.storyboard */; };
@@ -70,6 +69,10 @@
 		76F3CE4B185676FD000B7B55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F3CE2D185676FD000B7B55 /* UIKit.framework */; };
 		76F3CE53185676FD000B7B55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 76F3CE51185676FD000B7B55 /* InfoPlist.strings */; };
 		76F3CE55185676FD000B7B55 /* FLHS_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F3CE54185676FD000B7B55 /* FLHS_AppTests.m */; };
+		D30DE0881E20984E008C3071 /* DayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DE0811E20984E008C3071 /* DayViewController.m */; };
+		D30DE0891E20984E008C3071 /* InputCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DE0831E20984E008C3071 /* InputCourseViewController.m */; };
+		D30DE08A1E20984E008C3071 /* InputLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DE0851E20984E008C3071 /* InputLunchViewController.m */; };
+		D30DE08B1E20984E008C3071 /* LunchConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DE0871E20984E008C3071 /* LunchConnector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,8 +150,6 @@
 		7675E4A718F47CDF00390B24 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7675E4A918F47CE500390B24 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7675E4AD18F47CF500390B24 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		767DB830199C177300837BEC /* SchedInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchedInfoViewController.h; sourceTree = "<group>"; };
-		767DB831199C177300837BEC /* SchedInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchedInfoViewController.m; sourceTree = "<group>"; };
 		7681FB231A9A42EC00FA2A66 /* TodaySchedule.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodaySchedule.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7681FB271A9A42EC00FA2A66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7681FB281A9A42EC00FA2A66 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
@@ -187,6 +188,14 @@
 		76F3CE50185676FD000B7B55 /* FLHS_AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FLHS_AppTests-Info.plist"; sourceTree = "<group>"; };
 		76F3CE52185676FD000B7B55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		76F3CE54185676FD000B7B55 /* FLHS_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLHS_AppTests.m; sourceTree = "<group>"; };
+		D30DE0801E20984E008C3071 /* DayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayViewController.h; sourceTree = "<group>"; };
+		D30DE0811E20984E008C3071 /* DayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayViewController.m; sourceTree = "<group>"; };
+		D30DE0821E20984E008C3071 /* InputCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCourseViewController.h; sourceTree = "<group>"; };
+		D30DE0831E20984E008C3071 /* InputCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCourseViewController.m; sourceTree = "<group>"; };
+		D30DE0841E20984E008C3071 /* InputLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLunchViewController.h; sourceTree = "<group>"; };
+		D30DE0851E20984E008C3071 /* InputLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputLunchViewController.m; sourceTree = "<group>"; };
+		D30DE0861E20984E008C3071 /* LunchConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchConnector.h; sourceTree = "<group>"; };
+		D30DE0871E20984E008C3071 /* LunchConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchConnector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +244,14 @@
 		760511CF18B64EB400ECB580 /* Sports */ = {
 			isa = PBXGroup;
 			children = (
+				D30DE0801E20984E008C3071 /* DayViewController.h */,
+				D30DE0811E20984E008C3071 /* DayViewController.m */,
+				D30DE0821E20984E008C3071 /* InputCourseViewController.h */,
+				D30DE0831E20984E008C3071 /* InputCourseViewController.m */,
+				D30DE0841E20984E008C3071 /* InputLunchViewController.h */,
+				D30DE0851E20984E008C3071 /* InputLunchViewController.m */,
+				D30DE0861E20984E008C3071 /* LunchConnector.h */,
+				D30DE0871E20984E008C3071 /* LunchConnector.m */,
 				76A642D918D8CB4C00B9C051 /* sportsTableViewController.h */,
 				76A642DA18D8CB4C00B9C051 /* sportsTableViewController.m */,
 				76A642DC18D8CBB600B9C051 /* jvTableViewController.h */,
@@ -366,8 +383,6 @@
 				760511CF18B64EB400ECB580 /* Sports */,
 				76273B2818BD2FE00058637C /* createBellViewController.h */,
 				76273B2918BD2FE00058637C /* createBellViewController.m */,
-				767DB830199C177300837BEC /* SchedInfoViewController.h */,
-				767DB831199C177300837BEC /* SchedInfoViewController.m */,
 				76C2E6361885CD5100288977 /* AnnounceViewController.h */,
 				76C2E6371885CD5100288977 /* AnnounceViewController.m */,
 				76F3CE38185676FD000B7B55 /* AppDelegate.h */,
@@ -594,19 +609,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767DB832199C177300837BEC /* SchedInfoViewController.m in Sources */,
 				76F3CE40185676FD000B7B55 /* ViewController.m in Sources */,
 				76A642DB18D8CB4C00B9C051 /* sportsTableViewController.m in Sources */,
+				D30DE08B1E20984E008C3071 /* LunchConnector.m in Sources */,
 				76F3CE3A185676FD000B7B55 /* AppDelegate.m in Sources */,
 				76F3CE36185676FD000B7B55 /* main.m in Sources */,
 				763D3DE318C6693400E9F5C5 /* menusViewController.m in Sources */,
+				D30DE0891E20984E008C3071 /* InputCourseViewController.m in Sources */,
 				76273B2A18BD2FE00058637C /* createBellViewController.m in Sources */,
 				76392316187C928E00116D1A /* SideBarViewController.m in Sources */,
 				76C2E6381885CD5100288977 /* AnnounceViewController.m in Sources */,
 				76A642DE18D8CBB600B9C051 /* jvTableViewController.m in Sources */,
+				D30DE0881E20984E008C3071 /* DayViewController.m in Sources */,
 				76E2775418B64741008B718C /* CalendarViewController.m in Sources */,
 				76A642E118D8CBC100B9C051 /* varsTableViewController.m in Sources */,
 				76392313187C927300116D1A /* SWRevealViewController.m in Sources */,
+				D30DE08A1E20984E008C3071 /* InputLunchViewController.m in Sources */,
 				76835C571A12C1E9008FDF6B /* tempSportsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -797,7 +815,7 @@
 					"${SDK_DIR}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "FLHS_App/FLHS_App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -823,7 +841,7 @@
 					"${SDK_DIR}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "FLHS_App/FLHS_App-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

@@ -12,8 +12,8 @@
     IBOutlet UIWebView *webScreen;
 }
 
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
+
 
 
 @end

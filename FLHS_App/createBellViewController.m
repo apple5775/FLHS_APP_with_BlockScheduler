@@ -140,7 +140,6 @@
         [query cancel];
         query = NULL;
     }*/
-    
     _sidebarButton.tintColor = [UIColor colorWithRed:181/255.0 green:12/255.0 blue:12/255.0 alpha:1];
     
     _sidebarButton.target = self.revealViewController;
@@ -168,7 +167,7 @@
         dateString = [dateFormat stringFromDate:today];
         [PFConfig getConfigInBackgroundWithBlock:^(PFConfig *config, NSError *error) {
             NSArray *days = config[@"WhatDay"];
-            NSLog(@"Sucessfully accessed Day Codes", "Yay!");
+            NSLog(@"Sucessfully accessed Day Codes %@", @"Yay!");
             NSString *separatingString = @":";
             for (NSString *dayCode in days) {
                 NSArray *subStrings = [dayCode componentsSeparatedByString:separatingString];
